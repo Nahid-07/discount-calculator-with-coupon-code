@@ -1,23 +1,18 @@
 document.getElementById('sub-btn').addEventListener('click',function(){
     // step 1 get the price field value
-    const priceField = document.getElementById('price');
-    const priceString = priceField.value;
-    const price = parseFloat(priceString);
-    priceField.value = '';
+    const priceField = getPriceFieldValue('price');
     // step 2 get the discount field value
-    const discountField = document.getElementById('discount');
-    const discountString = discountField.value;
-    const discount = parseFloat(discountString);
-    discountField.value = '';
+    const discountField = getPriceFieldValue('discount');
+    if(isNaN(priceField) && isNaN(discountField)){
+        alert("please enter a valid number");
+    }
     // step 3 get the coupon code field
-    const couponCode = document.getElementById('coupon-code');
-    const couponCodeText = couponCode.value;
-    couponCode.value = '';
-    if(couponCodeText !== 'dom'){
+    const couponCode = discountText('coupon-code');
+    if(couponCode !== 'dom'){
+        alert('Your given coupon code is wrong');
         return;
     }
-    const lastPriceField = document.getElementById('last-price');
-    const totalDiscountPrice =price - ((price  / 100 ) * discount);
-    lastPriceField.innerText = totalDiscountPrice;
+    const totalDiscountPrice =priceField - ((priceField  / 100 ) * discountField);
+    setTextValue('last-price',totalDiscountPrice)
 
 })
